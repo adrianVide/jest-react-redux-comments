@@ -7,5 +7,5 @@ it('shows a comment box', () => {
 
     ReactDOM.render(<App />, div);
 
-    ReactDOM.unmountComponentAtNode(div)
-})
+    ReactDOM.unmountComponentAtNode(div);
+});

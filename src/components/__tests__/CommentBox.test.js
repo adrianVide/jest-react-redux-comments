@@ -1,25 +1,40 @@
-import React from 'react';
-import CommentBox from '../CommentBox';
-import { mount } from 'enzyme';
+import React from "react";
+import CommentBox from "../CommentBox";
+import { mount } from "enzyme";
 
-let wrapped
+let wrapped;
 
 beforeEach(() => {
-    wrapped = mount(<CommentBox />);
-})
+  wrapped = mount(<CommentBox />);
+});
 
 afterEach(() => {
-    wrapped.unmount();
-})
+  wrapped.unmount();
+});
 
-it('has a text area and a button', () => {
-    expect(wrapped.find('textarea').length).toEqual(1);
-    expect(wrapped.find('button').length).toEqual(1);
-})
+it("has a text area and a button", () => {
+  expect(wrapped.find("textarea").length).toEqual(1);
+  expect(wrapped.find("button").length).toEqual(1);
+});
 
-it('has a text area where useres can type in', () => {
-    wrapped.find('textarea').simulate('change', {
-        target: { value: 'new comment' }
-    });
-    wrapped.update();
-})
+it("has a text area where useres can type in", () => {
+  wrapped.find("textarea").simulate("change", {
+    target: { value: "random comment" },
+  });
+  wrapped.update();
+
+  expect(wrapped.find("textarea").prop("value")).toEqual("random comment");
+});
+
+it("has a text area that clears when submitted", () => {
+
+  wrapped.find("textarea").simulate("change", {
+    target: { value: "random comment" },
+  });
+  
+  wrapped.update();
+  wrapped.find("textarea").simulate("submit");
+  wrapped.update();
+
+  expect(wrapped.find("textarea").prop("value")).toEqual("");
+});

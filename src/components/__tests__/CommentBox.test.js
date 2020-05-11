@@ -21,4 +21,5 @@ it('has a text area where useres can type in', () => {
     wrapped.find('textarea').simulate('change', {
         target: { value: 'new comment' }
     });
+    wrapped.update();
 }) 

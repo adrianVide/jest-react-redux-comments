@@ -22,4 +22,4 @@ it('has a text area where useres can type in', () => {
         target: { value: 'new comment' }
     });
     wrapped.update();
-}) 
+})

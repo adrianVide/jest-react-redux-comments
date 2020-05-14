@@ -26,7 +26,7 @@ describe("the text area", () => {
     wrapped.update();
   });
 
-  it("has a text area where useres can type in", () => {
+  it("has a text area where users can type in", () => {
     expect(wrapped.find("textarea").prop("value")).toEqual("random comment");
   });
 

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import * as actions from '../actions'
+import * as actions from "../actions";
 
 class CommentBox extends Component {
   state = {
@@ -13,21 +13,23 @@ class CommentBox extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-   
-    
-    this.props.saveComment(this.state.comment)
+
+    this.props.saveComment(this.state.comment);
 
     this.setState({ comment: "" });
   };
   render() {
     return (
-      <form onSubmit={this.handleSubmit} action="">
-        <h4>Add a Comment</h4>
-        <textarea onChange={this.handleChange} value={this.state.comment} />
-        <div>
-          <button>Submit Comment</button>
-        </div>
-      </form>
+      <div>
+        <form onSubmit={this.handleSubmit} action="">
+          <h4>Add a Comment</h4>
+          <textarea onChange={this.handleChange} value={this.state.comment} />
+          <div>
+            <button>Submit Comment</button>
+          </div>
+        </form>
+        <button onClick={this.props.fetchComments}>Fetch Comments</button>
+      </div>
     );
   }
 }

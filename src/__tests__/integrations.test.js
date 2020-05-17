@@ -25,7 +25,7 @@ it("can fetch a list of comments and display them", (done) => {
     </Root>
   );
 
-  //Find the 'fecthComments' button and click it
+  // Find the 'fecthComments' button and click it
   wrapped.find(".fetch-comments").simulate("click");
 
   //Expect to find the 2 comments

@@ -1,15 +1,38 @@
-import React from 'react';
-import {mount} from 'enzyme';
-import Root from './Root';
-import App from './App';
+import React from "react";
+import { mount } from "enzyme";
+import moxios from "moxios";
 
-it('can fetch a list of comments and display them', () => {
-    //Attempt to render the entire APP
+import Root from "../Root";
+import App from "../components/App";
 
-    //Find the 'fecthComments' button and click it
+beforeEach(() => {
+  moxios.install();
+  moxios.stubRequest("http://jsonplaceholder.typicode.com/comments", {
+    status: 200,
+    response: [{ name: "Fetched #1" }, { name: "Fetched #2" }],
+  });
+});
 
-    //Expect to find the 500 comments
-    
-    
-    expect
-})
+afterEach(() => {
+  moxios.uninstall();
+});
+
+it("can fetch a list of comments and display them", (done) => {
+  //Attempt to render the entire APP
+  const wrapped = mount(
+    <Root>
+      <App />
+    </Root>
+  );
+
+  //Find the 'fecthComments' button and click it
+  wrapped.find(".fetch-comments").simulate("click");
+
+  //Expect to find the 2 comments
+  moxios.wait(() => {
+    wrapped.update();
+    expect(wrapped.find("li").length).toEqual(2);
+    done();
+    wrapped.unmount();
+  });
+});
